@@ -1,23 +1,24 @@
 const path = require('path');
+const { merge } = require('webpack-merge');
 const common = require('./webpack.common');
 
-module.exports = {
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+module.exports = merge(common, {
     mode: "production",
-    entry: "./src/index.js",
-    output: {
-        filename: "app.js",
-        path: path.resolve(__dirname, "build")
-    },
-    module: {
-        rules: [
-            {
-                test: /\.scss$/i,
-                use: [
-                    "style-loader",
-                    "css-loader",
-                    "sass-loader"
-                ],
-            },
-        ],
-    }
-}
+    plugins:[
+        new MiniCssExtractPlugin()
+    ],
+    // module: {
+    //     rules: [
+    //         {
+    //             test: /\.scss$/i,
+    //             use: [
+    //                 MiniCssExtractPlugin.loader,
+    //                 "css-loader",
+    //                 "sass-loader"
+    //             ],
+    //         },
+    //     ]
+    // }
+})

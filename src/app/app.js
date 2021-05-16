@@ -1,1 +1,1 @@
-export const div = document.getElementById("div");
+// export const div = document.getElementById("div");

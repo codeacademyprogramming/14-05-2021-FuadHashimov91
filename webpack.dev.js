@@ -1,23 +1,12 @@
 const path = require('path');
+const { merge } = require('webpack-merge');
 const common = require('./webpack.common');
 
-module.exports = {
+module.exports = merge(common, {
     mode: "development",
-    entry: "./src/index.js",
-    output: {
-        filename: "app.js",
-        path: path.resolve(__dirname, "build")
+    devServer: {
+        contentBase: path.join(__dirname, 'build'),
+        compress: false,
+        port: 9000,
     },
-    module: {
-        rules: [
-            {
-                test: /\.scss$/i,
-                use: [
-                    "style-loader",
-                    "css-loader",
-                    "sass-loader"
-                ],
-            },
-        ],
-    }
-}
+})
